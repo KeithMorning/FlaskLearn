@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Falskr</title>
+    <link rel=stylesheet type="text/css" href="{{ url_for('static',filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/styleCs.css') }}">
+</head>
+<div class=page>
+    <h1>Flaskr</h1>
+    <div class=metanav>
+        {% if not session.logged_in %}
+        <a href="{{ url_for('login') }}">login</a>
+        {% else %}
+        <a href="{{ url_for('logout') }}">logout</a>
+        {% endif %}
+        <a href="{{ url_for('add_entry')}}">Add</a>
+        
+    </div>
+    {% for message in get_flashed_messages() %}
+    <div class=flash>{{ message }}</div>
+    {% endfor %}
+    {% block body %}{% endblock %}
+
+</div>
+
+</html>

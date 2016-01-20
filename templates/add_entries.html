@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block body %}
+    <h2>Add new entry</h2>
+    <form action="{{ url_for('add_entry') }}" method="post">
+        <dl>
+            <dt>Title:</dt>
+            <dd><input type="text" class="input-hg" name="title"></dd>
+            <dt>Text:</dt>
+            <dd><input type="text" class="input-hg" name="text"></dd>
+            <dd><input type="submit" class="btn btn-primary btn-large btn-block" value="save"></dd>
+            <dt>" "</dt>
+
+        </dl>
+
+    </form>
+{% endblock %}
