@@ -4,6 +4,7 @@ from flask import Flask, request, session, g, redirect, url_for,\
 import flask_uploads
 from flask_uploads import UploadSet,IMAGES
 from contextlib import closing
+import os
 
 #configuration
 DATABASE = '/Users/keith/PycharmProjects/FlaskLearn/sqllite/flaskr.db'
@@ -29,12 +30,21 @@ def init_db():
             db.cursor().executescript(f.read())
         db.commit()
 
-
+#上传多个文件
 @app.route('/upload',methods=['GET','POST'])
 def upload():
-    if request.method == 'POST' and 'photos' in request.files:
-        filename = photos.save(request.files['photos'])
-        rect = Phot
+    if request.method == 'POST':
+        for filename in request.files:
+            file = request.files[filename]
+            file.save(os.path.join(UPLOADED_PHOTOS_DEST,file.filename))
+            print(file.filename)
+        return "success"
+
+    if request.method == 'GET':
+        return render_template('upload.html')
+
+
+
 
 @app.before_request
 def before_request():
